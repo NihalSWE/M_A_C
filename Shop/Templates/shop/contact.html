@@ -1,0 +1,80 @@
+{% extends '../shop/base.html' %}
+
+
+{% block titel %}Contact{% endblock %}
+{% block css %}
+
+{% endblock css %}
+
+ <style>
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Center the button */
+        .center-btn {
+            text-align: center;
+        }
+    </style>
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <h3>Contact Us</h3>
+    <form action="/shop/contact" method="post" onsubmit="return validateForm();">{% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number">
+        </div>
+        <div class="form-group">
+            <label for="desc">How May We Help You?</label>
+            <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+        </div>
+        <div class="center-btn">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+        var desc = document.getElementById('desc').value;
+
+        if (name === '' || email === '' || phone === '' || desc === '') {
+            alert('Please fill out all the fields before submitting the form.');
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
+    }
+</script>
+{% endblock %}
